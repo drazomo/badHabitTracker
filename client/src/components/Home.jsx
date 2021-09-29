@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Grid, Grow, Typography } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+
 import Input from './Input/Input';
 import Habits from './Habits/Habits';
+import { deleteHabit, getHabits } from '../actions/habits';
 
 const Home = () => {
-    const [ habit, setHabit ] = useState('');
+    const [ currentId, setCurrentId ] = useState(0);
+    const dispatch = useDispatch();
 
-    const handleOnSubmit = e => {
-        e.preventDefault();
-        console.log(habit)
-    }; 
+    useEffect(() => {
+        dispatch(getHabits());
+    }, [ dispatch ])
 
     return (
         <Grow in>
@@ -17,8 +22,8 @@ const Home = () => {
                 <Grid container justifyContent='center' alignItems='center'>
                     <Typography variant='h3'>Bad Habit Tracker</Typography>
                 </Grid> 
-                <Input setHabit={setHabit} habit={habit} handleOnSubmit={handleOnSubmit}/>
-                <Habits />
+                <Input currentId={currentId} setCurrentId={setCurrentId} />
+                <Habits setCurrentId={setCurrentId} />
             </Container>
         </Grow>
     )

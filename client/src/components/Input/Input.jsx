@@ -1,10 +1,41 @@
 import { Grid, IconButton, InputBase, Paper } from "@material-ui/core"
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import PostAddIcon from '@material-ui/icons/PostAdd';
+import { useEffect, useState } from "react";
+import { createHabit, editHabit } from "../../actions/habits";
 
 import useStyles from './styles';
 
-const Input = ({ habit, setHabit, handleOnSubmit }) => {
+const Input = ({ setCurrentId, currentId }) => {
+    const [ habit, setHabit ] = useState({title: ''});
+    const record = useSelector(state => (currentId ? state.habits.habits.find(habit => habit._id === currentId) : null));
+    const history = useHistory();
+    const dispatch = useDispatch();
     const classes  = useStyles();
+
+    useEffect(() => {
+        if(!record?.title) clear();
+        if(record) setHabit(record);
+    }, [ record, dispatch ]);
+
+    const clear = () => {
+        setCurrentId(0);
+        setHabit({title: ''});
+    };
+
+
+    const handleOnSubmit = e => {
+        e.preventDefault();
+
+        if(currentId === 0) {
+            dispatch(createHabit(habit, history));
+            clear();
+        } else {
+            dispatch(editHabit(currentId, habit));
+            clear();
+        }
+    }; 
 
     return (
         <Grid container justifyContent='center' alignItems='center'>
@@ -13,9 +44,9 @@ const Input = ({ habit, setHabit, handleOnSubmit }) => {
                     className={classes.input}
                     placeholder='Track Habit'
                     inputProps={{ 'aria-label': 'Track Habit', }}
-                    onChange={e => setHabit(e.target.value)}
-                    name='habit'
-                    value={habit}
+                    onChange={e => setHabit({...habit, title : e.target.value})}
+                    name='title'
+                    value={habit.title}
                 /> 
                 <IconButton type='submit' className={classes.iconButton}>
                     <PostAddIcon />
