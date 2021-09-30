@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Grid, Grow, Typography } from '@material-ui/core';
+import { Button, Container, Grid, Grow, Typography } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -21,6 +21,7 @@ const Home = () => {
             <Container>
                 <Grid container justifyContent='center' alignItems='center'>
                     <Typography variant='h3'>Bad Habit Tracker</Typography>
+                    <Button variant='contained'>Sign In</Button>
                 </Grid> 
                 <Input currentId={currentId} setCurrentId={setCurrentId} />
                 <Habits setCurrentId={setCurrentId} />

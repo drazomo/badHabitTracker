@@ -7,3 +7,6 @@ export const editHabit = (id, editedHabit) => API.patch(`/habits/${id}`, editedH
 export const deleteHabit = (id) => API.delete(`/habits/${id}`);
 export const updateTime = (id) => API.patch(`/habits/${id}/updateTime`);
 export const getHabits = () => API.get('/habits');
+
+export const signUp = formData => API.post('/users/signup', formData);
+export const signIn = formData => API.post('/users/signin', formData);

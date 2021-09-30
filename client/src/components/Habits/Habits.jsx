@@ -41,7 +41,7 @@ const Habits = ({ setCurrentId }) => {
                 {title}
               </Typography>
               <Typography variant='subtitle2' align='right'>
-                { moment(createAt).fromNow() }
+                { moment(createAt).fromNow(true) }
               </Typography>
             </Box>
           </React.Fragment>
