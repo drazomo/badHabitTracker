@@ -13,6 +13,7 @@ const Input = ({ setCurrentId, currentId }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const classes  = useStyles();
+    const user = JSON.parse(localStorage.getItem('profie'));
 
     useEffect(() => {
         if(!record?.title) clear();
@@ -29,10 +30,10 @@ const Input = ({ setCurrentId, currentId }) => {
         e.preventDefault();
 
         if(currentId === 0) {
-            dispatch(createHabit(habit, history));
+            dispatch(createHabit({...habit, name: user?.result?.name}, history));
             clear();
         } else {
-            dispatch(editHabit(currentId, habit));
+            dispatch(editHabit(currentId, {...habit, name: user?.result?.name}));
             clear();
         }
     }; 

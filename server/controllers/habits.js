@@ -7,7 +7,7 @@ export const createHabit = async ( req, res ) => {
     const habit = req.body;
     console.log(habit);
 
-    const newHabitPost = new HabitItem({ ...habit, createdAt: new Date().toISOString() });
+    const newHabitPost = new HabitItem({ ...habit, createdAt: new Date().toISOString(), creator: req.userId });
 
     try {
         await newHabitPost.save();
@@ -19,9 +19,10 @@ export const createHabit = async ( req, res ) => {
 };
 
 export const getHabits = async (req, res) => {
+    const loggedUser = req.userId;
 
     try {
-       const allHabits = await HabitItem.find();
+       const allHabits = await HabitItem.find({ creator: loggedUser});
        res.status(200).json(allHabits);
     } catch (err) {
         res.status(404).json({ message: err.message });
