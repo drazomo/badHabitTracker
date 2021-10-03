@@ -7,7 +7,7 @@ export const createHabit = async ( req, res ) => {
     const habit = req.body;
     console.log(habit);
 
-    const newHabitPost = new HabitItem({ ...habit, createdAt: new Date().toISOString(), creator: req.userId });
+    const newHabitPost = new HabitItem({ ...habit, creator: req.userId });
 
     try {
         await newHabitPost.save();

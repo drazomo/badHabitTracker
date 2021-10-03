@@ -6,7 +6,7 @@ const habitSchema = mongoose.Schema({
     creator: String,
     createAt : {
         type: Date,
-        default: new Date()
+        default: new Date().toISOString()
     }
  });
 

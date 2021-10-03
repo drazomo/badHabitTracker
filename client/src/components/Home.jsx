@@ -20,11 +20,9 @@ const Home = () => {
         <Grow in>
             <Container>
                 <Grid container justifyContent='center' alignItems='center'>
-                    <Typography variant='h3'>Bad Habit Tracker</Typography>
-                    <Button variant='contained'>Sign In</Button>
-                </Grid> 
                 <Input currentId={currentId} setCurrentId={setCurrentId} />
                 <Habits setCurrentId={setCurrentId} />
+                </Grid> 
             </Container>
         </Grow>
     )
