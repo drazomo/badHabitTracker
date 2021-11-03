@@ -40,7 +40,6 @@ const Habits = ({ setCurrentId }) => {
                 </IconButton>
                 <IconButton aria-label="refreshTime" onClick={() => {
                   dispatch(updateTime(_id));
-                  dispatch(getHabits());
                   }}>
                   <RefreshIcon fontSize='small' />
                 </IconButton>
